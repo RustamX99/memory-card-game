@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Card Game</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .card {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+        }
+        
+        .card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-4xl w-full">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Memory Card Game</h1>
+            <div class="flex justify-center gap-8 mb-6">
+                <div class="bg-white rounded-lg p-4 shadow-md">
+                    <span class="text-sm text-gray-600">Moves:</span>
+                    <span id="moves" class="text-2xl font-bold text-blue-600">0</span>
+                </div>
+                <div class="bg-white rounded-lg p-4 shadow-md">
+                    <span class="text-sm text-gray-600">Time:</span>
+                    <span id="timer" class="text-2xl font-bold text-green-600">0s</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-board" class="grid grid-cols-4 gap-4 max-w-md mx-auto mb-8">
+            <!-- Cards will be generated here -->
+        </div>
+
+        <div class="text-center">
+            <button id="restart-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                Restart Game
+            </button>
+        </div>
+
+        <div id="win-message" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white p-8 rounded-lg text-center">
+                <h2 class="text-2xl font-bold text-green-600 mb-4">Congratulations!</h2>
+                <p class="text-lg text-gray-700 mb-4">Tabriklayman siz <span id="final-moves">0</span> yurishlar bilan <span id="final-time">0</span> sekunda otdingiz!</p>
+                <button onclick="location.reload()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded">
+                    Play Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
